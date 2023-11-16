@@ -1,9 +1,10 @@
 app:
   title: Scaffolded Backstage App
   baseUrl: ${APP_DOMAIN}
+  # baseUrl: http://localhost:3000
 
 organization:
-  name: hngiap
+  name: hngiap-${VERSION}
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -13,16 +14,19 @@ backend:
   #   keys:
   #     - secret: ${BACKEND_SECRET}
   baseUrl: ${APP_DOMAIN}
+  # baseUrl: http://localhost:7007
   listen:
     port: 7007
     # Uncomment the following host directive to bind to specific interfaces
     # host: 127.0.0.1
   csp:
+    upgrade-insecure-requests: false
     connect-src: ["'self'", 'http:', 'https:']
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
     origin: ${APP_DOMAIN}
+    # origin: http://localhost:3000
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   # This is for local development only, it is not recommended to use this in production
@@ -47,7 +51,7 @@ integrations:
     #   apiBaseUrl: https://ghe.example.net/api/v3
     #   token: ${GHE_TOKEN}
 
-proxy:
+# proxy:
   ### Example for how to add a proxy endpoint for the frontend.
   ### A typical reason to do this is to handle HTTPS and CORS for internal services.
   # endpoints:
@@ -85,25 +89,51 @@ scaffolder:
     visibility: private
 
 catalog:
+  import:
+    entityFilename: catalog-info.yaml
+    pullRequestBranchName: backstage-integration
   rules:
-    - allow: [Component, System, API, Group, User, Resource, Location]
+    - allow: [Component, System, API, Resource, Location]
   locations:
-    # Backstage example components
-    - type: url
-      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all-components.yaml
+    # Local example data, file locations are relative to the backend process, typically `packages/backend`
+    # - type: file
+    #   target: ../../examples/entities.yaml
 
-    # Backstage example systems
-    - type: url
-      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all-systems.yaml
+    # Local example template
+    # - type: file
+    #   target: ../../examples/template/template.yaml
+    #   rules:
+    #     - allow: [Template]
 
-    # Backstage example APIs
+    # Simple python application template
     - type: url
-      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all-apis.yaml
+      target: https://github.com/hngiap94/backstage-software-templates/blob/main/simple-python-app/template.yaml
+      rules:
+        - allow: [Template]
 
-    # Backstage example resources
+    # Simple aws web application template
     - type: url
-      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all-resources.yaml
+      target: https://github.com/hngiap94/backstage-software-templates/blob/main/simple-aws-web-app/template.yaml
+      rules:
+        - allow: [Template]
 
-    # Backstage example organization groups
-    - type: url
-      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme/org.yaml
+    # Local example organizational data
+    # - type: file
+    #   target: ../../examples/org.yaml
+    #   rules:
+    #     - allow: [User, Group]
+
+    # Uncomment these lines to add more example data
+    # - type: url
+    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
+
+    # Uncomment these lines to add an example org
+    # - type: url
+    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
+    #   rules:
+    #     - allow: [User, Group]
+
+    # - type: url
+    #   target: https://github.com/backstage/software-templates/blob/main/scaffolder-templates/create-react-app/template.yaml
+    #   rules:
+    #     - allow: [Template]

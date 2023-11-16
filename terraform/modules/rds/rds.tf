@@ -7,8 +7,8 @@ resource "aws_security_group" "rds_instance_sg" {
     from_port       = 5432
     to_port         = 5432
     protocol        = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
     # security_groups = [var.default_security_group_id]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -37,5 +37,5 @@ resource "aws_db_instance" "default_db" {
   availability_zone       = "us-east-1b"
   db_subnet_group_name    = aws_db_subnet_group.default_sn.name
   vpc_security_group_ids  = [aws_security_group.rds_instance_sg.id]
-  publicly_accessible=true
+  publicly_accessible     = true
 }

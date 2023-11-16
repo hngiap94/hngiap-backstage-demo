@@ -37,7 +37,8 @@ resource "aws_ecs_task_definition" "default_task" {
       {"name": "BACKEND_URL", "value": "http://${var.alb_dns_name}"},
       {"name": "POSTGRES_PORT", "value": "5432"},
       {"name": "DEFAULT_REGION", "value": var.default_region},
-      {"name": "BUCKET_NAME", "value": var.tech_docs_bucket_name}
+      {"name": "BUCKET_NAME", "value": var.tech_docs_bucket_name},
+      {"name": "NODE_OPTIONS", "value": "--no-node-snapshot"}
    ],
    logConfiguration = {
     logDriver = "awslogs"
