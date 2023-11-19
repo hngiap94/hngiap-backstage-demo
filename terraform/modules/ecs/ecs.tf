@@ -25,7 +25,7 @@ resource "aws_ecs_task_definition" "default_task" {
       {"name": "POSTGRES_HOST", "valueFrom": var.postgres_host_arn},
       {"name": "POSTGRES_USER", "valueFrom": var.postgres_user_arn},
       {"name": "POSTGRES_PASSWORD", "valueFrom": var.postgres_password_arn},
-      {"name": "GITHUB_TOKEN", "valueFrom": var.github_token_arn},
+      {"name": "AUTH_GITHUB_TOKEN", "valueFrom": var.github_token_arn},
       {"name": "AUTH_GITHUB_CLIENT_ID", "valueFrom": var.github_client_id_arn},
       {"name": "AUTH_GITHUB_CLIENT_SECRET", "valueFrom": var.github_client_secret_arn},
       {"name": "ACCESS_KEY_ID", "valueFrom": var.access_key_id_arn},

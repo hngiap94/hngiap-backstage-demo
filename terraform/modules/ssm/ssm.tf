@@ -17,7 +17,7 @@ resource "aws_ssm_parameter" "postgres_password" {
 }
 
 resource "aws_ssm_parameter" "github_token" {
-  name  = "GITHUB_TOKEN"
+  name  = "AUTH_GITHUB_TOKEN"
   type  = "String"
   value = var.github_token
 }
