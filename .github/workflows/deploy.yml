@@ -39,3 +39,8 @@ jobs:
 
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
+    
+    - name: Get Terraform Outputs
+      run: |
+        terraform output -json > terraform_outputs.json
+        cat terraform_outputs.json
