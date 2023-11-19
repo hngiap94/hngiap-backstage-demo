@@ -1,5 +1,5 @@
 output "aws_ecr_registry" {
-  value = aws_ecr_repository.registry.name
+  value = aws_ecr_repository.registry.repository_url
 }
 
 output "app_domain" {

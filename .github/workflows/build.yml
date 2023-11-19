@@ -50,5 +50,5 @@ jobs:
 
     - name: Build And Push Docker Image
       run: |
-        docker image build . -f packages/backend/Dockerfile -t ${{ secrets.AWS_ECR_REGISTRY }}/backstage-image:${{ vars.DOCKER_IMAGE_TAG }}
-        docker push ${{ secrets.AWS_ECR_REGISTRY }}/backstage-image:${{ vars.DOCKER_IMAGE_TAG }}
+        docker image build . -f packages/backend/Dockerfile -t ${{ secrets.AWS_ECR_REGISTRY }}:${{ vars.DOCKER_IMAGE_TAG }}
+        docker push ${{ secrets.AWS_ECR_REGISTRY }}:${{ vars.DOCKER_IMAGE_TAG }}
