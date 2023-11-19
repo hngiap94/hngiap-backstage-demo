@@ -32,6 +32,8 @@ backend:
   # This is for local development only, it is not recommended to use this in production
   # The production database configuration is stored in app-config.production.yaml
   database:
+    # client: better-sqlite3
+    # connection: ':memory:'
     client: pg
     connection:
       host: ${POSTGRES_HOST}
@@ -64,9 +66,16 @@ integrations:
 # and an external cloud storage when deploying TechDocs for production use-case.
 # https://backstage.io/docs/features/techdocs/how-to-guides#how-to-migrate-from-techdocs-basic-to-recommended-deployment-approach
 techdocs:
+  # builder: 'local' # Alternatives - 'external'
+  # generator:
+  #   runIn: 'docker' # Alternatives - 'local'
+  #   dockerImage: 'spotify/techdocs'
+  #   pullImage: true
+  # publisher:
+  #   type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
   builder: 'external'
   generators:
-    techdocs: 'local'
+    techdocs: 'local' #TODO
   publisher:
     type: 'awsS3'
     awsS3:
@@ -86,54 +95,54 @@ auth:
 
 scaffolder:
   github:
-    visibility: private
+    visibility: public
 
 catalog:
   import:
     entityFilename: catalog-info.yaml
     pullRequestBranchName: backstage-integration
   rules:
-    - allow: [Component, System, API, Resource, Location]
+    - allow: [Component, System, API, Resource, Domain, Location]
   locations:
-    # Local example data, file locations are relative to the backend process, typically `packages/backend`
-    # - type: file
-    #   target: ../../examples/entities.yaml
-
-    # Local example template
-    # - type: file
-    #   target: ../../examples/template/template.yaml
-    #   rules:
-    #     - allow: [Template]
-
-    # Simple python application template
+    # Demo templates
     - type: url
-      target: https://github.com/hngiap94/backstage-software-templates/blob/main/simple-python-app/template.yaml
+      target: https://github.com/hngiap94/backstage-software-catalogs/blob/main/templates/demo-templates.yaml
       rules:
         - allow: [Template]
 
-    # Simple aws web application template
+    # Demo groups
     - type: url
-      target: https://github.com/hngiap94/backstage-software-templates/blob/main/simple-aws-web-app/template.yaml
+      target: https://github.com/hngiap94/backstage-software-catalogs/blob/main/groups/demo-groups.yaml
       rules:
-        - allow: [Template]
+        - allow: [Group]
 
-    # Local example organizational data
-    # - type: file
-    #   target: ../../examples/org.yaml
-    #   rules:
-    #     - allow: [User, Group]
+    # Demo users
+    - type: url
+      target: https://github.com/hngiap94/backstage-software-catalogs/blob/main/users/demo-users.yaml
+      rules:
+        - allow: [User]
+
+    # Demo APIs
+    - type: url
+      target: https://github.com/hngiap94/backstage-software-templates/blob/main/apis/demo-apis.yaml
+
+    # Demo components
+    - type: url
+      target: https://github.com/hngiap94/backstage-software-catalogs/blob/main/components/demo-component.yaml
+
+    # Demo systems
+    - type: url
+      target: https://github.com/hngiap94/backstage-software-catalogs/blob/main/systems/demo-portal.yaml
+
+    # Demo resources
+    - type: url
+      target: https://github.com/hngiap94/backstage-software-catalogs/blob/main/resources/demo-db.yaml
+
+    # Demo domains
+    - type: url
+      target: https://github.com/hngiap94/backstage-software-catalogs/blob/main/domains/demo-domain.yaml
 
     # Uncomment these lines to add more example data
     # - type: url
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
 
-    # Uncomment these lines to add an example org
-    # - type: url
-    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
-    #   rules:
-    #     - allow: [User, Group]
-
-    # - type: url
-    #   target: https://github.com/backstage/software-templates/blob/main/scaffolder-templates/create-react-app/template.yaml
-    #   rules:
-    #     - allow: [Template]
