@@ -1,10 +1,17 @@
-# [Backstage](https://backstage.io)
+# How to deploy
 
-This is your newly scaffolded Backstage App, Good Luck!
+## Deploy Infrastructure
 
-To start the app, run:
+Update **AWS_ACCESS_KEY_ID** and **AWS_SECRET_ACCESS_KEY** if changed
 
-```sh
-yarn install
-yarn dev
-```
+Run **Deploy Infrastructure** workflow
+
+Get the terraform output
+
+## Build Backstage Image
+
+Update 
+
+## Deploy Newer Image
+
+Rerun **Deploy Infrastructure** workflow
