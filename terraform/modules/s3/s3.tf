@@ -25,3 +25,35 @@ resource "aws_s3_bucket_public_access_block" "tech_docs_bucket_acl" {
   restrict_public_buckets = true
   depends_on              = [ aws_s3_bucket.tech_docs_bucket ]
 }
+
+#==========================
+# IAM
+#==========================
+
+# resource "aws_iam_user" "backstage" {
+#   name = "${var.project}-techdocs-user"
+# }
+
+# resource "aws_iam_user_policy" "backstage" {
+#   name = "${var.project}-techdocs-user-policy"
+#   user = aws_iam_user.backstage.name
+#   policy = data.aws_iam_policy_document.backstage_policy.json
+# }
+
+# data "aws_iam_policy_document" "backstage_policy" {
+#   statement {
+#     actions = [
+#       "s3:PutObject",
+#       "s3:GetObject",
+#       "s3:DeleteObjectVersion",
+#       "s3:ListBucket",
+#       "s3:DeleteObject",
+#       "s3:PutObjectAcl"
+#     ]
+#     effect = "Allow"
+#     resources = [
+#       "${aws_s3_bucket.tech_docs_bucket.arn}",
+#       "${aws_s3_bucket.tech_docs_bucket.arn}/*",
+#     ]
+#   }
+# }
