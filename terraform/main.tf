@@ -1,5 +1,9 @@
 data "aws_caller_identity" "current" {}
 
+provider "aws" {
+  region = var.default_region
+}
+
 ### VPC
 module "aws_vpc" {
   source         = "./modules/vpc"
