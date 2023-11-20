@@ -10,6 +10,14 @@ defaults:
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  TF_VAR_docker_image_tag: ${{ vars.DOCKER_IMAGE_TAG }}
+  TF_VAR_postgres_user: ${{ secrets.POSTGRES_USER }}
+  TF_VAR_postgres_password: ${{ secrets.POSTGRES_PASSWORD }}
+  TF_VAR_github_token: ${{ secrets.AUTH_GITHUB_TOKEN }}
+  TF_VAR_github_client_id: ${{ secrets.AUTH_GITHUB_CLIENT_ID }}
+  TF_VAR_github_client_secret: ${{ secrets.AUTH_GITHUB_CLIENT_SECRET }}
+  TF_VAR_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  TF_VAR_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   tf_destroy:
